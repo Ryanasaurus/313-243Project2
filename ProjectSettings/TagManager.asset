@@ -51,3 +51,12 @@ TagManager:
   - name: Front
     uniqueID: 3405993979
     locked: 0
+  - name: Background
+    uniqueID: 2252526643
+    locked: 0
+  - name: Terrain
+    uniqueID: 2984160731
+    locked: 0
+  - name: Player
+    uniqueID: 1837168825
+    locked: 0
