@@ -21,6 +21,11 @@ public class SimpleEnemyController : MonoBehaviour {
 	// Movement Fields
 	private float xMovement = 0;
 
+	// so for future, implement acceleration/deceleration
+	// have a velocity vector and apply it to the movement in update method
+	// in FixedUpdate, alter the velocity vector by a set amount 
+	// aim is to make enemy movement smoother, and less janky
+
 	void Start () {		
 		anim = GetComponent<Animator>();
 		rb2D = GetComponent<Rigidbody2D>();
