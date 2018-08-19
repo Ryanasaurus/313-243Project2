@@ -5,16 +5,16 @@ using UnityEngine;
 public class SimplePlatformController : MonoBehaviour {
 
 	[HideInInspector] public bool facingRight = true;
-	[HideInInspector] public bool jump = true;
+	[HideInInspector] public bool jump = false;
 
 	public float moveForce = 365f;
 	public float maxSpeed = 5f;
 	public float jumpForce = 1000f;
 	public Transform groundCheck;
-	public Transform rightCheck;
+	public Transform frontCheck;
 
 	private bool grounded = false;
-	private bool collideRight = false;
+	private bool frontCollide = false;
 	private Animator anim;
 	private Rigidbody2D rb2D;
 
@@ -28,7 +28,7 @@ public class SimplePlatformController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-		collideRight = Physics2D.Linecast(transform.position, rightCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		frontCollide = Physics2D.Linecast(transform.position, frontCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
 		if(Input.GetButtonDown("Jump") && grounded) {
 			jump = true;
@@ -40,7 +40,7 @@ public class SimplePlatformController : MonoBehaviour {
 
 		anim.SetFloat("Speed", Mathf.Abs(h));
 
-		if(!collideRight){
+		if(!frontCollide){
 			if(h*rb2D.velocity.x < maxSpeed) {
 				rb2D.AddForce(Vector2.right * h * moveForce);
 			}
