@@ -6,6 +6,7 @@ public class SimplePlatformController : MonoBehaviour {
 
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool jump = false;
+	[HideInInspector] public Transform location;
 
 	public float moveForce = 365f;
 	public float maxSpeed = 5f;
@@ -23,6 +24,7 @@ public class SimplePlatformController : MonoBehaviour {
 	void Awake () {
 		anim = GetComponent<Animator>();
 		rb2D = GetComponent<Rigidbody2D>();
+		location = this.transform;
 	}
 	
 	// Update is called once per frame
