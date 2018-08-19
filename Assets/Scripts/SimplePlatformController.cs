@@ -11,8 +11,10 @@ public class SimplePlatformController : MonoBehaviour {
 	public float maxSpeed = 5f;
 	public float jumpForce = 1000f;
 	public Transform groundCheck;
+	public Transform rightCheck;
 
 	private bool grounded = false;
+	private bool collideRight = false;
 	private Animator anim;
 	private Rigidbody2D rb2D;
 
@@ -26,6 +28,7 @@ public class SimplePlatformController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		collideRight = Physics2D.Linecast(transform.position, rightCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
 		if(Input.GetButtonDown("Jump") && grounded) {
 			jump = true;
@@ -37,11 +40,13 @@ public class SimplePlatformController : MonoBehaviour {
 
 		anim.SetFloat("Speed", Mathf.Abs(h));
 
-		if(h*rb2D.velocity.x < maxSpeed) {
-			rb2D.AddForce(Vector2.right * h * moveForce);
-		}
-		if(Mathf.Abs(rb2D.velocity.x) > maxSpeed) {
-			rb2D.velocity = new Vector2(Mathf.Sign(rb2D.velocity.x) * maxSpeed, rb2D.velocity.y);
+		if(!collideRight){
+			if(h*rb2D.velocity.x < maxSpeed) {
+				rb2D.AddForce(Vector2.right * h * moveForce);
+			}
+			if(Mathf.Abs(rb2D.velocity.x) > maxSpeed) {
+				rb2D.velocity = new Vector2(Mathf.Sign(rb2D.velocity.x) * maxSpeed, rb2D.velocity.y);
+			}
 		}
 
 		if((h>0 && !facingRight) || (h<0 && facingRight)) {
