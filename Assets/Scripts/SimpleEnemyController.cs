@@ -12,12 +12,14 @@ public class SimpleEnemyController : MonoBehaviour {
 	public float jumpForce = 1000f;
 	public Transform groundCheck;
 	public Transform frontCheck;
+	public Transform playerTransform;
 
 	private bool grounded = false;
 	private bool frontCollide = false;
 	private Animator anim;
 	private Rigidbody2D rb2D;
 	// Movement Fields
+	private float xMovement = 0;
 
 	void Start () {		
 		anim = GetComponent<Animator>();
@@ -29,10 +31,34 @@ public class SimpleEnemyController : MonoBehaviour {
 		frontCollide = Physics2D.Linecast(transform.position, frontCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
 		// TODO: Implement AI
-		// Deciding where to move
+		if(playerTransform.position.x<transform.position.x) {
+			xMovement = -1f;
+		} else {
+			xMovement = 1f;
+		}
+		if(playerTransform.position.y>transform.position.y && grounded) {
+			jump = true;
+		}
 	}
 
 	void FixedUpdate() {
-		// Apply Movement
+		anim.SetFloat("Speed", Mathf.Abs(xMovement));
+
+		if(xMovement*rb2D.velocity.x < maxSpeed) {
+			rb2D.AddForce(Vector2.right * xMovement * moveForce);
+		}
+		if(Mathf.Abs(rb2D.velocity.x) > maxSpeed) {
+			rb2D.velocity = new Vector2(Mathf.Sign(rb2D.velocity.x) * maxSpeed, rb2D.velocity.y);
+		}
+
+		// if((h>0 && !facingRight) || (h<0 && facingRight)) {
+		// 	Flip();
+		// }
+
+		if(jump) {
+			anim.SetTrigger("Jump");
+			rb2D.AddForce(new Vector2(0f, jumpForce));
+			jump = false;
+		}
 	}
 }
