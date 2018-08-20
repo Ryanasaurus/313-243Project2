@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimplePlatformController : MonoBehaviour {
 
 	[HideInInspector] public bool facingRight = true;
-	[HideInInspector] public bool jump = false;
+	[HideInInspector] public bool jump = true;
 	// [HideInInspector] public static Transform location;
 
 	public float moveForce = 365f;
