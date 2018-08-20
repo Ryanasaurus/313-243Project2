@@ -47,7 +47,7 @@ public class SimpleEnemyController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		anim.SetFloat("Speed", Mathf.Abs(xMovement));
+		// anim.SetFloat("Speed", Mathf.Abs(xMovement));
 
 		if(xMovement*rb2D.velocity.x < maxSpeed) {
 			rb2D.AddForce(Vector2.right * xMovement * moveForce);
@@ -61,7 +61,7 @@ public class SimpleEnemyController : MonoBehaviour {
 		// }
 
 		if(jump) {
-			anim.SetTrigger("Jump");
+			// anim.SetTrigger("Jump");
 			rb2D.AddForce(new Vector2(0f, jumpForce));
 			jump = false;
 		}
