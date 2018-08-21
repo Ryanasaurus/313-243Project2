@@ -51,22 +51,22 @@ public class SimpleEnemyController : MonoBehaviour {
 	void FixedUpdate() {
 		// anim.SetFloat("Speed", Mathf.Abs(xMovement));
 
-		// if(xMovement*rb2D.velocity.x < maxSpeed) {
-		// 	rb2D.AddForce(Vector2.right * xMovement * moveForce);
-		// }
-		// if(Mathf.Abs(rb2D.velocity.x) > maxSpeed) {
-		// 	rb2D.velocity = new Vector2(Mathf.Sign(rb2D.velocity.x) * maxSpeed, rb2D.velocity.y);
-		// }
+		if(xMovement*rb2D.velocity.x < maxSpeed) {
+			rb2D.AddForce(Vector2.right * xMovement * moveForce);
+		}
+		if(Mathf.Abs(rb2D.velocity.x) > maxSpeed) {
+			rb2D.velocity = new Vector2(Mathf.Sign(rb2D.velocity.x) * maxSpeed, rb2D.velocity.y);
+		}
 
 		// if((h>0 && !facingRight) || (h<0 && facingRight)) {
 		// 	Flip();
 		// }
 
-		// if(jump) {
-		// 	// anim.SetTrigger("Jump");
-		// 	rb2D.AddForce(new Vector2(0f, jumpForce));
-		// 	jump = false;
-		// }
+		if(jump) {
+			// anim.SetTrigger("Jump");
+			rb2D.AddForce(new Vector2(0f, jumpForce));
+			jump = false;
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
