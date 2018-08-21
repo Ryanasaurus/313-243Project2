@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimplePlatformController : MonoBehaviour {
 
 	[HideInInspector] public bool facingRight = true;
-	[HideInInspector] public bool jump = true;
+	[HideInInspector] public bool jump = false;
 	// [HideInInspector] public static Transform location;
 
 	public float moveForce = 365f;
@@ -18,6 +18,10 @@ public class SimplePlatformController : MonoBehaviour {
 	private bool frontCollide = false;
 	private Animator anim;
 	private Rigidbody2D rb2D;
+	private bool shoot = false;
+
+	public Transform firePoint;
+	public GameObject simpleBullet;
 
 
 	void Awake () {
@@ -33,6 +37,10 @@ public class SimplePlatformController : MonoBehaviour {
 
 		if(Input.GetButtonDown("Jump") && grounded) {
 			jump = true;
+		}
+
+		if(Input.GetButtonDown("Fire1")) {
+			shoot = true;
 		}
 	}
 
@@ -58,6 +66,11 @@ public class SimplePlatformController : MonoBehaviour {
 			anim.SetTrigger("Jump");
 			rb2D.AddForce(new Vector2(0f, jumpForce));
 			jump = false;
+		}
+
+		if(shoot) {
+			shoot = false;
+			Instantiate(simpleBullet, firePoint.position, firePoint.rotation);
 		}
 	}
 
