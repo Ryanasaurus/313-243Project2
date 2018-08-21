@@ -74,6 +74,36 @@ public class SimplePlatformController : MonoBehaviour {
 		}
 	}
 
+
+
+
+
+
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+    	if (other.gameObject.CompareTag("Pickup"))
+    {
+
+    		other.gameObject.SetActive (false);
+
+    }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	void Flip() {
 		facingRight = !facingRight;
 		Vector3 scale = transform.localScale;
