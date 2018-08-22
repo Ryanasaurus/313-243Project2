@@ -54,9 +54,9 @@ public class SimpleEnemyController : MonoBehaviour {
 			}
 		}
 
-		// if((h>0 && !facingRight) || (h<0 && facingRight)) {
-		// 	Flip();
-		// }
+		if((xMovement>0 && !facingRight) || (xMovement<0 && facingRight)) {
+			Flip();
+		}
 
 		if(jump) {
 			// anim.SetTrigger("Jump");
@@ -70,5 +70,12 @@ public class SimpleEnemyController : MonoBehaviour {
 			// gameObject.SetActive(false);
 			Destroy(gameObject);
 		} 
+	}
+
+	void Flip() {
+		facingRight = !facingRight;
+		Vector3 scale = transform.localScale;
+		scale.x *= -1;
+		transform.localScale = scale;
 	}
 }

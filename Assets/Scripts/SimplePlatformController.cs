@@ -25,8 +25,10 @@ public class SimplePlatformController : MonoBehaviour {
 	private bool shootRocket = false;
 	private bool pickUpRocket = false;
 	private float rocketCooldownCounter = 0f;
+	private bool alive = true;
 
 	public Transform firePoint;
+	public GameObject respawnPoint;
 	public GameObject simpleBullet;
 	public GameObject simpleRocket;
 
@@ -109,6 +111,8 @@ public class SimplePlatformController : MonoBehaviour {
     	if (other.gameObject.CompareTag("Pickup")) {
     		other.gameObject.SetActive (false);
 			pickUpRocket = true;
+		} else if (other.gameObject.CompareTag("Enemy")) {
+			transform.position = respawnPoint.transform.position;
 		}
     }
 
