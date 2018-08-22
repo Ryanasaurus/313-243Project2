@@ -3,6 +3,8 @@
 
 [Free Platform Game Assets](https://assetstore.unity.com/packages/2d/environments/free-platform-game-assets-85838)
 
+[2D Platformer kit](https://assetstore.unity.com/packages/essentials/tutorial-projects/2d-platformer-11228)
+
 [16x16 Dungeon Tileset](https://0x72.itch.io/16x16-dungeon-tileset)
 
 [Space Base Platform Shooter 8-bit Art Graphics Pack](https://sitebender.itch.io/space-base-platform-shooter-8-bit-art-graphics-pack)
@@ -13,4 +15,4 @@
 
 [2D Robot Character](https://janitoad.itch.io/2d-robot-character)
 
-[2D Platformer kit](https://assetstore.unity.com/packages/essentials/tutorial-projects/2d-platformer-11228)
+
