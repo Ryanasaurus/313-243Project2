@@ -22,8 +22,6 @@ public class SimpleEnemyController : MonoBehaviour {
 	// Movement Fields
 	private float xMovement = 0;
 
-	private bool enabled = true;
-
 	void Start () {		
 		// anim = GetComponent<Animator>();
 		rb2D = GetComponent<Rigidbody2D>();
@@ -68,9 +66,9 @@ public class SimpleEnemyController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.gameObject.layer == LayerMask.NameToLayer("Projectile")) {
+		if(other.gameObject.layer == LayerMask.NameToLayer("Bullet") || other.gameObject.layer == LayerMask.NameToLayer("Explosion")) {
+			// gameObject.SetActive(false);
 			Destroy(gameObject);
-			this.enabled = false;
 		} 
 	}
 }

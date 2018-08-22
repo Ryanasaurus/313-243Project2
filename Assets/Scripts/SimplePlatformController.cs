@@ -13,16 +13,22 @@ public class SimplePlatformController : MonoBehaviour {
 	public float jumpForce = 1000f;
 	public Transform groundCheck;
 	public Transform frontCheck;
-	public float bulletSpeed = 500f;
+	public float bulletSpeed = 30f;
+	public float rocketSpeed = 40f;
+	public float rocketCooldown = 5f;
 
 	private bool grounded = false;
 	private bool frontCollide = false;
 	private Animator anim;
 	private Rigidbody2D rb2D;
 	private bool shoot = false;
+	private bool shootRocket = false;
+	private bool pickUpRocket = false;
+	private float rocketCooldownCounter = 0f;
 
 	public Transform firePoint;
 	public GameObject simpleBullet;
+	public GameObject simpleRocket;
 
 
 	void Awake () {
@@ -42,6 +48,14 @@ public class SimplePlatformController : MonoBehaviour {
 
 		if(Input.GetButtonDown("Fire1")) {
 			shoot = true;
+		}
+
+		if(Input.GetButtonDown("Fire2") && rocketCooldownCounter<=0f && pickUpRocket) { 
+			shootRocket = true;
+		}
+
+		if(rocketCooldownCounter>0){
+			rocketCooldownCounter-=Time.deltaTime;
 		}
 	}
 
@@ -78,11 +92,23 @@ public class SimplePlatformController : MonoBehaviour {
 				bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-bulletSpeed, 0);
 			}
 		}
+
+		if(shootRocket) {
+			rocketCooldownCounter = rocketCooldown;
+			shootRocket = false;
+			GameObject bullet = (GameObject)Instantiate(simpleRocket, firePoint.position, firePoint.rotation);
+			if(facingRight) {
+				bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(rocketSpeed, 0);
+			} else {
+				bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-rocketSpeed, 0);
+			}
+		}
 	}
 
     void OnTriggerEnter2D(Collider2D other) {
     	if (other.gameObject.CompareTag("Pickup")) {
     		other.gameObject.SetActive (false);
+			pickUpRocket = true;
 		}
     }
 
