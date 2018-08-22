@@ -8,8 +8,9 @@ public class SimpleEnemyController : MonoBehaviour {
 	[HideInInspector] public bool facingRight = true;
 
 	public float moveForce = 365f;
-	public float maxSpeed = 5f;
+	public float maxSpeed = 2f;
 	public float jumpForce = 1000f;
+	public float agroRange = 10f;
 	public Transform groundCheck;
 	public Transform frontCheck;
 	public Transform playerTransform;
@@ -33,12 +34,12 @@ public class SimpleEnemyController : MonoBehaviour {
 		frontCollide = Physics2D.Linecast(transform.position, frontCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
 		// TODO: Implement AI
-		if(playerTransform.position.x<transform.position.x) {
+		if(playerTransform.position.x<transform.position.x && Mathf.Abs(playerTransform.position.x-transform.position.x) < agroRange) {
 			xMovement = -1f;
-		} else {
+		} else if (playerTransform.position.x>transform.position.x && Mathf.Abs(playerTransform.position.x-transform.position.x) < agroRange) {
 			xMovement = 1f;
 		}
-		if(playerTransform.position.y>transform.position.y && grounded) {
+		if(playerTransform.position.y>transform.position.y - 5 && grounded && Mathf.Abs(playerTransform.position.x-transform.position.x) < agroRange) {
 			jump = true;
 		}
 	}
