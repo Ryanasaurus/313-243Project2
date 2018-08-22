@@ -12,3 +12,5 @@
 [Grotto Escape Chibi Monsters](https://ansimuz.itch.io/grotto-escape-chibi-monsters)
 
 [2D Robot Character](https://janitoad.itch.io/2d-robot-character)
+
+[2D Platformer kit](https://assetstore.unity.com/packages/essentials/tutorial-projects/2d-platformer-11228)
