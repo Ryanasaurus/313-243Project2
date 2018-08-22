@@ -13,6 +13,7 @@ public class SimplePlatformController : MonoBehaviour {
 	public float jumpForce = 1000f;
 	public Transform groundCheck;
 	public Transform frontCheck;
+	public float bulletSpeed = 500f;
 
 	private bool grounded = false;
 	private bool frontCollide = false;
@@ -70,39 +71,20 @@ public class SimplePlatformController : MonoBehaviour {
 
 		if(shoot) {
 			shoot = false;
-			Instantiate(simpleBullet, firePoint.position, firePoint.rotation);
+			GameObject bullet = (GameObject)Instantiate(simpleBullet, firePoint.position, firePoint.rotation);
+			if(facingRight) {
+				bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed, 0);
+			} else {
+				bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-bulletSpeed, 0);
+			}
 		}
 	}
 
-
-
-
-
-
-    void OnTriggerEnter2D(Collider2D other) 
-    {
-    	if (other.gameObject.CompareTag("Pickup"))
-    {
-
+    void OnTriggerEnter2D(Collider2D other) {
+    	if (other.gameObject.CompareTag("Pickup")) {
     		other.gameObject.SetActive (false);
-
+		}
     }
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	void Flip() {
 		facingRight = !facingRight;

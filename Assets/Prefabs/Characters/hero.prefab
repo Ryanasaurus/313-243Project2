@@ -1248,7 +1248,7 @@ GameObject:
   - component: {fileID: 81704724688588956}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1340,9 +1340,10 @@ MonoBehaviour:
   jumpForce: 1000
   groundCheck: {fileID: 4513793453985536}
   frontCheck: {fileID: 400010}
+  bulletSpeed: 5
+  camera: {fileID: 20746412531900650}
   firePoint: {fileID: 400016}
-  simpleBullet: {fileID: 1400128913661118, guid: 1b96f8dd082cbd74099e39a9db39388f,
-    type: 2}
+  simpleBullet: {fileID: 0}
 --- !u!124 &124610324781791346
 Behaviour:
   m_ObjectHideFlags: 1

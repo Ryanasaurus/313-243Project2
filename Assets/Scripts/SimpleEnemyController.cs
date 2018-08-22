@@ -21,12 +21,7 @@ public class SimpleEnemyController : MonoBehaviour {
 	// Movement Fields
 	private float xMovement = 0;
 
-	// so for future, implement acceleration/deceleration
-	// have a velocity vector and apply it to the movement in update method
-	// in FixedUpdate, alter the velocity vector by a set amount 
-	// aim is to make enemy movement smoother, and less janky
-
-	private Vector2 velocityVector = new Vector2(0, 0);
+	private bool enabled = true;
 
 	void Start () {		
 		// anim = GetComponent<Animator>();
@@ -51,11 +46,13 @@ public class SimpleEnemyController : MonoBehaviour {
 	void FixedUpdate() {
 		// anim.SetFloat("Speed", Mathf.Abs(xMovement));
 
-		if(xMovement*rb2D.velocity.x < maxSpeed) {
-			rb2D.AddForce(Vector2.right * xMovement * moveForce);
-		}
-		if(Mathf.Abs(rb2D.velocity.x) > maxSpeed) {
-			rb2D.velocity = new Vector2(Mathf.Sign(rb2D.velocity.x) * maxSpeed, rb2D.velocity.y);
+		if(!frontCollide) {
+			if(xMovement*rb2D.velocity.x < maxSpeed) {
+				rb2D.AddForce(Vector2.right * xMovement * moveForce);
+			}
+			if(Mathf.Abs(rb2D.velocity.x) > maxSpeed) {
+				rb2D.velocity = new Vector2(Mathf.Sign(rb2D.velocity.x) * maxSpeed, rb2D.velocity.y);
+			}
 		}
 
 		// if((h>0 && !facingRight) || (h<0 && facingRight)) {
@@ -72,6 +69,7 @@ public class SimpleEnemyController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.layer == LayerMask.NameToLayer("Projectile")) {
 			Destroy(gameObject);
+			this.enabled = false;
 		} 
 	}
 }
